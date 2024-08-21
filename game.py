@@ -1,5 +1,7 @@
 import pygame
 import time
+import os
+import RPi.GPIO as GPIO
 
 from pyModbusTCP.client import ModbusClient
 from menu import *
@@ -11,6 +13,7 @@ from pymodbus.payload import BinaryPayloadDecoder
 class Game():
     def __init__(self):
         pygame.init()
+        GPIO.setmode(GPIO.BCM)
         self.running, self.updateData, self.readData, self.updateIp = True, False, False, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
         self.DISPLAY_W, self.DISPLAY_H = 320, 240
@@ -52,6 +55,8 @@ class Game():
             if event.type == pygame.QUIT:
                 self.running, self.playing, self.confirmation = False, False, False
                 self.curr_menu.run_display = False
+            if GPIO.input(23) == False:
+                self.START_KEY = True   
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     self.START_KEY = True
