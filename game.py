@@ -14,6 +14,7 @@ class Game():
     def __init__(self):
         pygame.init()
         GPIO.setmode(GPIO.BCM)
+        GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         self.running, self.updateData, self.readData, self.updateIp = True, False, False, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
         self.DISPLAY_W, self.DISPLAY_H = 320, 240
@@ -55,7 +56,7 @@ class Game():
             if event.type == pygame.QUIT:
                 self.running, self.playing, self.confirmation = False, False, False
                 self.curr_menu.run_display = False
-            if GPIO.input(23) == False:
+            if GPIO.input(23) == GPIO.HIGH:
                 self.START_KEY = True   
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
