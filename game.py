@@ -50,14 +50,14 @@ class Game():
             self.curr_menu = self.readDatas
 
     def check_events(self):
-  #      if self.buttonNext.is_pressed:
-  #          self.START_KEY = True
-  #      if self.buttonBack.is_pressed:
-  #          self.BACK_KEY = True
-  #      if self.buttonDown.is_pressed:
-  #          self.DOWN_KEY = True
-  #      if self.buttonUp.is_pressed:
-  #          self.UP_KEY = True
+        if self.buttonNext.is_pressed:
+            self.START_KEY = True
+        if self.buttonBack.is_pressed:
+            self.BACK_KEY = True
+        if self.buttonDown.is_pressed:
+            self.DOWN_KEY = True
+        if self.buttonUp.is_pressed:
+            self.UP_KEY = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
