@@ -58,6 +58,7 @@ class Game():
   #          self.DOWN_KEY = True
   #      if self.buttonUp.is_pressed:
   #          self.UP_KEY = True
+  
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running, self.playing, self.confirmation = False, False, False
