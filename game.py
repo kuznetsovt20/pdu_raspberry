@@ -1,8 +1,8 @@
 import pygame
 import time
 import os
-import RPi.GPIO as GPIO
 
+from gpiozero import Button
 from pyModbusTCP.client import ModbusClient
 from menu import *
 from datetime import datetime
@@ -13,8 +13,6 @@ from pymodbus.payload import BinaryPayloadDecoder
 class Game():
     def __init__(self):
         pygame.init()
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         self.running, self.updateData, self.readData, self.updateIp = True, False, False, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
         self.DISPLAY_W, self.DISPLAY_H = 320, 240
@@ -37,6 +35,7 @@ class Game():
         self.amp1, self.amp2, self.amp3, self.wat1, self.wat2, self.wat3 = 0, 0, 0, 0, 0, 0
         self.menu_x, self.menu_y = 30, 40
         self.u1, self.u2, self.u3, self.u12, self.u23, self.u31, self.i1, self.i2, self.i3, self.p1, self.p2, self.p3 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        self.buttonNext, self.buttonBack, self.buttonUp, self.buttonDown = Button(27), Button(17), Button(22), Button(23)
 
     def transfer_loop(self):
         while self.updateData:
@@ -56,8 +55,18 @@ class Game():
             if event.type == pygame.QUIT:
                 self.running, self.playing, self.confirmation = False, False, False
                 self.curr_menu.run_display = False
-            if GPIO.input(23) == GPIO.HIGH:
-                self.START_KEY = True   
+            if self.buttonNext.is_pressed:
+                self.START_KEY = True
+                time.sleep(0.5)
+            if self.buttonBack.is_pressed:
+                self.BACK_KEY = True
+                time.sleep(0.5)
+            if self.buttonUp.is_pressed:
+                self.UP_KEY = True
+                time.sleep(0.5)
+            if self.buttonDown.is_pressed:
+                self.DOWN_KEY = True
+                time.sleep(0.5)    
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     self.START_KEY = True
