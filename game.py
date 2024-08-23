@@ -34,7 +34,7 @@ class Game():
         self.amp1, self.amp2, self.amp3, self.wat1, self.wat2, self.wat3 = 0, 0, 0, 0, 0, 0
         self.menu_x, self.menu_y = 30, 40
         self.u1, self.u2, self.u3, self.u12, self.u23, self.u31, self.i1, self.i2, self.i3, self.p1, self.p2, self.p3 = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-      #  self.buttonNext, self.buttonBack, self.buttonDown, self.buttonUp = Button(27), Button(17), Button(22), Button(23)
+        self.buttonNext, self.buttonBack, self.buttonDown, self.buttonUp = Button(27), Button(17), Button(22), Button(23)
 
     def transfer_loop(self):
         while self.updateData:
@@ -58,7 +58,7 @@ class Game():
   #          self.DOWN_KEY = True
   #      if self.buttonUp.is_pressed:
   #          self.UP_KEY = True
-  
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running, self.playing, self.confirmation = False, False, False
