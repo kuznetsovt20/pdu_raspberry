@@ -51,22 +51,22 @@ class Game():
             self.curr_menu = self.readDatas
 
     def check_events(self):
+        if self.buttonNext.is_pressed:
+                self.START_KEY = True
+                time.sleep(0.5)
+        if self.buttonBack.is_pressed:
+                self.BACK_KEY = True
+                time.sleep(0.5)
+        if self.buttonUp.is_pressed:
+                self.UP_KEY = True
+                time.sleep(0.5)
+        if self.buttonDown.is_pressed:
+                self.DOWN_KEY = True
+                time.sleep(0.5)    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running, self.playing, self.confirmation = False, False, False
                 self.curr_menu.run_display = False
-            if self.buttonNext.is_pressed:
-                self.START_KEY = True
-                time.sleep(0.5)
-            if self.buttonBack.is_pressed:
-                self.BACK_KEY = True
-                time.sleep(0.5)
-            if self.buttonUp.is_pressed:
-                self.UP_KEY = True
-                time.sleep(0.5)
-            if self.buttonDown.is_pressed:
-                self.DOWN_KEY = True
-                time.sleep(0.5)    
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     self.START_KEY = True
